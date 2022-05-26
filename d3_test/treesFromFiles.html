@@ -13,12 +13,12 @@
 		</section>
 		<section id="visualization">
 			<script type="text/javascript">
-				function loadFile() {
+				function loadFile() { //Called on file load to read the input file
                     const [file] = document.querySelector('input[type=file]').files;
                     const reader = new FileReader();
                     var myTree = null;
 
-                    reader.addEventListener("load", () => {
+                    reader.addEventListener("load", () => { //When the reader reads the text file, splits the file into lines (trees), declares this to global scope, and draws the first phylogram 
                         var txt = reader.result;
                         window.lines = txt.split("\n");
 
@@ -29,11 +29,11 @@
                         document.getElementById("textInput").value = 1
                     }, false);
 
-                    reader.readAsText(file);
+                    reader.readAsText(file); //Reads the input file, triggering the above function
 
                 };
                 
-                function newTree(i) {
+                function newTree(i) { //On slider change or new input value, removes phylogram SVG and redraws the new one according to the slider/input number
                     var myTree = null;
                     d3.select("body").select("#phylosvg").remove()
                     
@@ -42,7 +42,7 @@
                     document.getElementById("textInput").value = i
                 };
 
-                function changeSliderValue(val) {
+                function changeSliderValue(val) { //Called when input value is changed, changing the slider value and drawing the corresponding tree
                     document.getElementById("myRange").value = val
                     newTree(document.getElementById("myRange").value)
                 };
